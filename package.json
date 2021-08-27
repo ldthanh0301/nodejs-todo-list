@@ -1,0 +1,31 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldthanh0301/nodejs-todo-list.git"
+  },
+  "keywords": [
+    "f8",
+    "nodejs",
+    "nodejs-todo-list"
+  ],
+  "author": "ldthanh0301",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ldthanh0301/nodejs-todo-list/issues"
+  },
+  "homepage": "https://github.com/ldthanh0301/nodejs-todo-list#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
