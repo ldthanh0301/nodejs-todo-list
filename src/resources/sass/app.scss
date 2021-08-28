@@ -1,0 +1,16 @@
+$myfont: Georgia 1.1em;
+$table_head_col: #ccc;
+$table_row_col: #eee;
+$table_bor_col: #eee;
+$container_width: 700px;
+$first_col_width: 150px;
+
+
+.test {
+    color: $table_head_col;   
+}
+
+.title {
+    color: red;
+    font-size: 20px;
+}
