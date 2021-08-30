@@ -1,19 +1,17 @@
-var express = require('express')
-var newsRoute = require('./news')
-var siteRoute = require('./site')
+var express = require('express');
+var newsRoute = require('./news');
+var siteRoute = require('./site');
 
 function route(app) {
-    
-    app.get('/list-item',(req,res) =>{
-        res.render('list-item')
-      })
-    
-    app.use('/news',newsRoute)
+    app.get('/list-item', (req, res) => {
+        res.render('list-item');
+    });
 
-    app.use('/home',siteRoute)
+    app.use('/news', newsRoute);
 
-    app.use('/',siteRoute)
-    
+    app.use('/home', siteRoute);
+
+    app.use('/', siteRoute);
 }
 
-module.exports = route
+module.exports = route;
