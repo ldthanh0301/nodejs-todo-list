@@ -1,7 +1,18 @@
+const Course = require('../models/Course');
+
 class SiteController {
     // [GET] - /home
     index(req, res) {
-        res.render('home');
+        // res.render('home');
+
+        // vi du sư dung model return client json
+        Course.find({}, function (err, courses) {
+            if (!err) {
+                res.render('home');
+            } else {
+                res.status(400).json({ err: 'lỗi' });
+            }
+        });
     }
 
     // [GET] /search
