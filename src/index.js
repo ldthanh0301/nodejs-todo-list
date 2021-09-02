@@ -18,6 +18,9 @@ app.engine(
         extname: '.hbs',
     }),
 );
+//sư dụng để chuyển formdate thành req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //  sử dụng view engine là hanlderbars
 app.set('view engine', 'hbs');

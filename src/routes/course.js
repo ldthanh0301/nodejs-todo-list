@@ -3,8 +3,12 @@ var express = require('express');
 const route = require('.');
 var router = express.Router();
 
-// router.use('/:slug', coursesController.show);
+router.get('/create', courseController.create);
 
-router.use('/', courseController.index);
+router.post('/store', courseController.store);
+
+router.get('/:slug', courseController.show);
+
+router.get('/', courseController.index);
 
 module.exports = router;
