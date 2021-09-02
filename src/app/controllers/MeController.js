@@ -2,32 +2,23 @@ const { json } = require('express');
 const Course = require('../models/Course');
 
 class CourseController {
-    // [GET] - /courses
+    // [GET] - /me/courses - show list courses
     index(req, res, next) {
         Course.find({})
             .lean()
             .then((courses) => {
-                //  hàm khi mà handlerbar bị lỗi do truyền vào đối tượng không thể truy câp
-                //  nhưng phần này được thay thế bằng hàm .lean() ở trên
-                // courses = courses.map(data => {
-                //     // console.log(typeof data)
-                //     // console.log(typeof data.toObject())
-                //     return data.toObject()
-                // })
-
-                // trả về view /courses/index
-                res.render('courses', { courses: courses });
+                res.render('me/courses', { courses: courses });
             })
             .catch(next);
     }
 
-    // [GET] - /courses/create
+    // [GET] - /me/courses/create
     create(req, res, next) {
         // trả  về view /courses/create
         res.render('courses/create');
     }
 
-    // [POST] - /courses/store
+    // [POST] - /me/courses/store
     store(req, res, next) {
         Course.create(
             {
@@ -38,7 +29,7 @@ class CourseController {
             function (err) {
                 if (!err) {
                     // trả về view /courses/index
-                    res.redirect('/courses');
+                    res.redirect('/me/course');
                 } else {
                     console.log(err);
 
@@ -48,7 +39,7 @@ class CourseController {
         );
     }
 
-    // [GET] - /courses/:slug
+    // [GET] - /me/course/:slug
     show(req, res, next) {
         Course.findOne({ slug: req.params.slug })
             .lean()
@@ -64,19 +55,6 @@ class CourseController {
                 }
             })
             .catch(next);
-    }
-
-    // [PUT] - /courses/:id/edit
-    edit(req, res, next) {
-        // trả  về view /courses/edit
-
-        Course.findById(req.params.id)
-            .lean()
-            .then((course) => {
-                res.render('courses/edit', {
-                    course,
-                });
-            });
     }
 }
 

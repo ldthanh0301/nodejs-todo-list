@@ -5,6 +5,8 @@ var router = express.Router();
 
 router.get('/create', courseController.create);
 
+router.get('/:id/edit', courseController.edit);
+
 router.post('/store', courseController.store);
 
 router.get('/:slug', courseController.show);
