@@ -3,8 +3,8 @@ var express = require('express');
 const route = require('.');
 var router = express.Router();
 
-router.use('/:slug', newsController.show);
+router.get('/:slug', newsController.show);
 
-router.use('/', newsController.index);
+router.get('/', newsController.index);
 
 module.exports = router;

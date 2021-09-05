@@ -1,7 +1,9 @@
-const express = require('express');
 const path = require('path');
+const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const methodOverride = require('method-override');
+
 const route = require('./routes');
 const db = require('./app/config/db');
 
@@ -16,11 +18,19 @@ app.engine(
     'hbs',
     handlebars({
         extname: '.hbs',
+        helpers: {
+            sum: function (a, b) {
+                return a + b;
+            },
+        },
     }),
 );
 //sư dụng để chuyển formdate thành req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// sử dụng override method url ?_method=''
+app.use(methodOverride('_method'));
 
 //  sử dụng view engine là hanlderbars
 app.set('view engine', 'hbs');

@@ -10,17 +10,42 @@
             </tr>
         </thead>
         <tbody>
+            {{#unless courses}}
+            <tr class="text-center">
+                <td colspan=5>
+                    Bạn chưa thêm khóa học
+                    <a href="/courses/create">Thêm mới</a>
+                </td>    
+            </tr>
+            {{/unless}}
             {{#each courses}}
             <tr>
-                <th scope="row">{{@index}}</th>
+                <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.desription}}</td>
                 <td>{{this.updatedAt}}</td>
                 <td>
-                    <a href="/courses/{{this._id}}/edit">Chỉnh sửa</a>
+                    <a class="btn btn-primary btn-sm" href="/courses/{{this._id}}/edit">Chỉnh sửa</a>
+                    <button class="btnDelete btn btn-danger btn-sm" data-id="{{this._id}}">Xóa</button>
                 </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+<form id="frmDeleteCourse" method="POST" action='/courses/{{this._id}}?_method=delete'></form>
+
+<script>
+    var btnDeletes = document.getElementsByClassName('btnDelete');
+    var frmDeleteCourse = document.getElementById('frmDeleteCourse');
+
+    Array.from(btnDeletes).forEach( btnDelete => {
+        btnDelete.onclick = function(event) {
+            let courseID = this.getAttribute('data-id');
+            frmDeleteCourse.action = `/courses/${courseID}?_method=DELETE`;
+            frmDeleteCourse.submit();
+        }
+    })
+
+</script>

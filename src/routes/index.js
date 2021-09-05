@@ -15,8 +15,6 @@ function route(app) {
 
     app.use('/news', newsRoute);
 
-    app.use('/home', siteRoute);
-
     app.use('/', siteRoute);
 }
 

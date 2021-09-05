@@ -1,6 +1,6 @@
 const { json } = require('express');
 const Course = require('../models/Course');
-
+const slugify = require('slugify');
 class CourseController {
     // [GET] - /courses
     index(req, res, next) {
@@ -66,7 +66,7 @@ class CourseController {
             .catch(next);
     }
 
-    // [PUT] - /courses/:id/edit
+    // [GET] - /courses/:id/edit
     edit(req, res, next) {
         // trả  về view /courses/edit
 
@@ -77,6 +77,29 @@ class CourseController {
                     course,
                 });
             });
+    }
+    // [PUT] - /courses/:id
+    update(req, res, next) {
+        Course.updateOne(
+            { _id: req.params.id },
+            {
+                name: req.body.name,
+                desription: req.body.desription,
+                image: req.body.image,
+                slug: slugify(req.body.name),
+            },
+        )
+            .then(res.redirect('/me/courses/'))
+            .catch(next);
+    }
+
+    // [DELETE] - /courses/:id
+    delete(req, res, next) {
+        Course.delete({ _id: req.params.id })
+            .then((message) => {
+                res.redirect('back');
+            })
+            .catch(next);
     }
 }
 

@@ -1,7 +1,7 @@
 const Course = require('../models/Course');
 
 class SiteController {
-    // [GET] - /home
+    // [GET] - /
     index(req, res) {
         // res.render('home');
 
