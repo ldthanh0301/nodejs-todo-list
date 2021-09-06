@@ -1,0 +1,65 @@
+<div class="mt-4">
+  {{! thùng rác }}
+  <a href="/me/stored/courses">Trở về</a>
+  <table class="table mt-2">
+    <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên khóa học</th>
+        <th scope="col">Mô tả</th>
+        <th scope="col">Ngày cập nhật</th>
+        <th scope="col">Tùy chọn</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#unless courses}}
+        <tr class="text-center">
+          <td colspan="5">
+            Thùng rác rỗng
+            <a href="/me/stored/courses">Trở về</a>
+          </td>
+        </tr>
+      {{/unless}}
+      {{#each courses}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.desription}}</td>
+          <td>{{this.updatedAt}}</td>
+          <td>
+            <button
+              class="btn btn-primary btn-sm"
+              onclick="restore('{{this._id}}')"
+            >Khôi phục</button>
+            <button
+              class="btnDelete btn btn-danger btn-sm"
+              data-id="{{this._id}}"
+            >Xóa vĩnh viễn</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<form
+  id="frmRestoreCourse"
+  method="POST"
+  action=""
+></form>
+<form id="frmDeleteCourse" method="POST" action=""></form>
+
+<script>
+    var btnDeletes = document.getElementsByClassName('btnDelete'); var
+    frmDeleteCourse = document.getElementById('frmDeleteCourse'); var
+    frmRestoreCourse = document.getElementById('frmRestoreCourse');
+    Array.from(btnDeletes).forEach( btnDelete => { 
+        btnDelete.onclick = function(event) {
+            let courseID = this.getAttribute('data-id');
+                frmDeleteCourse.action = `/courses/${courseID}/force?_method=delete`;
+                frmDeleteCourse.submit(); } })
+    function restore (id) { 
+        frmRestoreCourse.action = `/courses/${id}/restore?_method=PATCH`;
+        frmRestoreCourse.submit(); 
+    }
+</script>

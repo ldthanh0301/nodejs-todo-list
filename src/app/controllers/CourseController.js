@@ -89,13 +89,31 @@ class CourseController {
                 slug: slugify(req.body.name),
             },
         )
-            .then(res.redirect('/me/courses/'))
+            .then(res.redirect('/me/stored/courses'))
             .catch(next);
     }
 
     // [DELETE] - /courses/:id
     delete(req, res, next) {
         Course.delete({ _id: req.params.id })
+            .then((message) => {
+                res.redirect('back');
+            })
+            .catch(next);
+    }
+
+    // [PATCH] - /courses/:id/restore
+    restore(req, res, next) {
+        Course.restore({ _id: req.params.id })
+            .then((message) => {
+                res.redirect('back');
+            })
+            .catch(next);
+    }
+
+    // [DELETE] - /courses/:id/force
+    force(req, res, next) {
+        Course.deleteOne({ _id: req.params.id })
             .then((message) => {
                 res.redirect('back');
             })

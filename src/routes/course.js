@@ -7,6 +7,10 @@ router.get('/create', courseController.create);
 
 router.get('/:id/edit', courseController.edit);
 
+router.patch('/:id/restore', courseController.restore);
+
+router.delete('/:id/force', courseController.force);
+
 router.delete('/:id', courseController.delete);
 
 router.put('/:id', courseController.update);
